@@ -12,6 +12,7 @@
         android:layout_weight="1.5">
 
         <ImageView
+            android:id="@+id/iv_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="image"
@@ -19,6 +20,7 @@
             android:src="@drawable/ic_knife" />
 
         <FrameLayout
+            android:id="@+id/fl_share"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="bottom|end"
@@ -42,21 +44,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#A2CFEE"
+        android:background="@color/main_bg"
         android:orientation="horizontal">
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/fl_renting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackground">
+            android:background="?attr/selectableItemBackground"
+            android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/shape_main_action_bg">
 
                 <ImageView
@@ -66,20 +69,30 @@
                     android:contentDescription="buy"
                     android:src="@drawable/ic_main_renting" />
             </FrameLayout>
-        </FrameLayout>
 
-        <FrameLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="菜刀租赁"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/fl_buy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:orientation="vertical"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground">
 
             <FrameLayout
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/shape_main_action_bg">
 
                 <ImageView
@@ -89,20 +102,30 @@
                     android:contentDescription="buy"
                     android:src="@drawable/ic_main_buy" />
             </FrameLayout>
-        </FrameLayout>
 
-        <FrameLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="菜刀购买"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/fl_recycle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:orientation="vertical"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground">
 
             <FrameLayout
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/shape_main_action_bg">
 
                 <ImageView
@@ -112,6 +135,15 @@
                     android:contentDescription="buy"
                     android:src="@drawable/ic_main_recycle" />
             </FrameLayout>
-        </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="回收菜刀"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

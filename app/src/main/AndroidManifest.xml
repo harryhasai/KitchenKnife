@@ -19,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".function.buy.BuyActivity" />
+        <activity android:name=".function.recycle.RecycleActivity" />
+        <activity android:name=".function.renting.RentingActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".function.renting_pay.RentingPayActivity" />
     </application>
 
 </manifest>
