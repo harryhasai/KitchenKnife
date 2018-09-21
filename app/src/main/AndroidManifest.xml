@@ -23,6 +23,10 @@
         <activity android:name=".function.recycle.RecycleActivity" />
         <activity android:name=".function.renting.RentingActivity" android:windowSoftInputMode="adjustPan" />
         <activity android:name=".function.renting_pay.RentingPayActivity" />
+        <activity android:name=".function.buy_pay.BuyPayActivity" />
+        <activity android:name=".function.recycle_pay.RecyclePayActivity" />
+        <activity android:name=".function.pay_success.PaySuccessActivity" />
+        <activity android:name=".function.share.ShareActivity" />
     </application>
 
 </manifest>

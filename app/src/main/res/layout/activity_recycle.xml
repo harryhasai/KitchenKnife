@@ -6,8 +6,56 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is RecycleActivity" />
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:contentDescription="image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_knife" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/main_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="提示: 请将刀具放置回收口"
+            android:textColor="@color/black1" />
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="菜刀编号: RFID"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="租赁手机号: 13836464487"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_commit"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:background="@drawable/shape_button_bg"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:layout_marginTop="35dp"
+            android:textSize="18sp" />
+    </LinearLayout>
 </LinearLayout>

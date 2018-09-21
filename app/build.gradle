@@ -38,4 +38,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
     //AndroidUtils
     implementation 'com.blankj:utilcode:1.19.0'
+    //二维码生成库
+    implementation 'com.google.zxing:core:3.3.0'
 }

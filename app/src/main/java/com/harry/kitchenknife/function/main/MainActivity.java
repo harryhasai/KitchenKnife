@@ -12,6 +12,7 @@ import com.harry.kitchenknife.base.presenter.BasePresenter;
 import com.harry.kitchenknife.function.buy.BuyActivity;
 import com.harry.kitchenknife.function.recycle.RecycleActivity;
 import com.harry.kitchenknife.function.renting.RentingActivity;
+import com.harry.kitchenknife.function.share.ShareActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +52,7 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fl_share: //二维码
+                startActivity(new Intent(this, ShareActivity.class));
                 break;
             case R.id.fl_renting://出租
                 startActivity(new Intent(this, RentingActivity.class));

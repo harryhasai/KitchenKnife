@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KitchenKnife</string>
+    <string name="pay_success_prompt1">提示: 押金会在24小时内返还到您的账户!</string>
+    <string name="pay_success_prompt2">提示: 请在菜刀出物口带走您的菜刀, 祝您使用愉快!</string>
 </resources>

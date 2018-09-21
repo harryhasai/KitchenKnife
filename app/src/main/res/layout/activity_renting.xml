@@ -155,15 +155,29 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_total"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@id/et_phone"
-            android:text="合计: ¥60"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:layout_alignStart="@id/et_phone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="合计:"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="¥60"
+                android:textColor="@color/text_red"
+                android:textSize="16sp" />
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/btn_commit"
