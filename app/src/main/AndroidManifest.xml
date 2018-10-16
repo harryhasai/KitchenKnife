@@ -21,12 +21,25 @@
         </activity>
         <activity android:name=".function.buy.BuyActivity" />
         <activity android:name=".function.recycle.RecycleActivity" />
-        <activity android:name=".function.renting.RentingActivity" android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".function.renting.RentingActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".function.renting_pay.RentingPayActivity" />
         <activity android:name=".function.buy_pay.BuyPayActivity" />
         <activity android:name=".function.recycle_pay.RecyclePayActivity" />
         <activity android:name=".function.pay_success.PaySuccessActivity" />
         <activity android:name=".function.share.ShareActivity" />
+        <activity android:name=".function.serial_port_test.SerialPortTestActivity">
+            <!--测试串口的测试类-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <service android:name=".function.service.WebSocketService" />
+        <service android:name=".function.service.SocketService" />
     </application>
 
 </manifest>

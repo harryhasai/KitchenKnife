@@ -21,12 +21,12 @@
         android:layout_height="0dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
-        android:padding="20dp"
         android:layout_marginTop="25dp"
         android:layout_weight="3"
         android:background="@drawable/shape_renting_center"
         android:elevation="3dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <ImageView
             android:id="@+id/iv_cover"
@@ -40,8 +40,8 @@
         <TextView
             android:id="@+id/tv_name_of_number"
             android:layout_width="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:text="编号: 1"
             android:textColor="@color/black" />
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="押金: ¥60"
+            android:text="金额: ¥60"
             android:textColor="@color/black" />
 
     </LinearLayout>
@@ -97,10 +97,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:text="微信支付"
-                android:textSize="17sp"
                 android:gravity="center_horizontal"
-                android:textColor="@color/black" />
+                android:text="微信支付"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -109,21 +109,22 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <ImageView
+                android:id="@+id/iv_ali_pay"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
-                android:gravity="center"
-                android:text="这里放二维码" />
+                android:contentDescription="这里放二维码"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:text="支付宝支付"
-                android:textSize="17sp"
                 android:gravity="center_horizontal"
-                android:textColor="@color/black" />
+                android:text="支付宝支付"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
         </LinearLayout>
 
     </LinearLayout>

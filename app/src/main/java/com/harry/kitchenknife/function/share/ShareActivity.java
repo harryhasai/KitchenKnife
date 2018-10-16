@@ -23,7 +23,7 @@ public class ShareActivity extends BaseActivity {
     protected void initView() {
         ImageView image = findViewById(R.id.image);
 
-        String abc = "12335465,787989895";
+        String abc = "7897878,893898";
 
         Bitmap qrCodeBitmap = QRCodeUtil.createQRCodeBitmap(abc, 300, 300);
         image.setImageBitmap(qrCodeBitmap);

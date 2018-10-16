@@ -64,6 +64,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
         android:layout_weight="1"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:background="@drawable/shape_renting_bottom"
         android:elevation="3dp"
         android:paddingBottom="10dp"
@@ -182,7 +184,7 @@
         <Button
             android:id="@+id/btn_commit"
             android:layout_width="60dp"
-            android:layout_height="22dp"
+            android:layout_height="25dp"
             android:layout_alignEnd="@id/et_phone"
             android:layout_alignParentBottom="true"
             android:background="@drawable/shape_button_bg"

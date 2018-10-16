@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.harry.kitchenknife"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -15,6 +15,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    sourceSets {
+        main { jni.srcDirs = [] }
     }
 }
 
@@ -36,8 +39,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
+//    implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
     //AndroidUtils
     implementation 'com.blankj:utilcode:1.19.0'
     //二维码生成库
     implementation 'com.google.zxing:core:3.3.0'
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    //JSON解析
+    implementation 'com.google.code.gson:gson:2.8.2'
 }
