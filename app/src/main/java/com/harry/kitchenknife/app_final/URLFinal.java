@@ -22,5 +22,9 @@ public class URLFinal {
      * 支付宝支付
      */
     public static final String ALI_PAY = "alipay/createOrder";
+    /**
+     * 登录
+     */
+    public static final String LOGIN = "vmLogin";
 
 }

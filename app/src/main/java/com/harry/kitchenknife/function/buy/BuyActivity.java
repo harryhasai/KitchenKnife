@@ -119,7 +119,7 @@ public class BuyActivity extends BaseActivity {
                         commodityTypeTitle = bean.commodityTypeTitle;
                         commodityTypeSellingPrice = bean.commodityTypeSellingPrice;
                     } else {
-                        ToastUtils.showShort("请求码200");
+                        ToastUtils.showShort(getKnifeCountEntity.msg);
                     }
                 }
             }

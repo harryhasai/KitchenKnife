@@ -26,4 +26,8 @@ public class ConstantFinal {
      * 用于在长连接的服务里接收广播
      */
     public static final String BROADCAST_ACTION = "BROADCAST_ACTION";
+    /**
+     * 用户电话号码
+     */
+    public static final String USER_PHONE = "USER_PHONE";
 }

@@ -23,5 +23,6 @@ public class PayEntity {
          */
 
         public String TwoDimensionalCode;
+        public String msg;
     }
 }

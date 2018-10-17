@@ -37,7 +37,7 @@ public class SocketService extends Service {
     //心跳包频率
     private static final long HEART_BEAT_RATE = 15 * 1000;
 
-//    public static final String HOST = "192.168.1.10";
+    //    public static final String HOST = "192.168.1.10";
     public static final String HOST = "47.92.226.61";
     public static final int PORT = 9502;
     public static final String HEART_BEAT_STRING = "00";//心跳包内容
@@ -45,7 +45,8 @@ public class SocketService extends Service {
     private ReadThread mReadThread;
     private WeakReference<Socket> mSocket;
 
-    private MessageReceiver messageReceiver;
+    private boolean isSend = true;
+
 
     // For heart Beat
     private long sendTime = 0L;
@@ -56,8 +57,9 @@ public class SocketService extends Service {
         public void run() {
             if (System.currentTimeMillis() - sendTime >= HEART_BEAT_RATE) {
                 //就发送一个HEART_BEAT_STRING过去 如果发送失败，就重新初始化一个socket
-                boolean isSuccess = sendMsg(HEART_BEAT_STRING);
-                if (!isSuccess) {
+                //发送设备编号到服务器
+                sendMsg("AA " + DeviceUtil.getDeviceID());
+                if (!isSend) {
                     mHandler.removeCallbacks(heartBeatRunnable);
                     mReadThread.release();
                     releaseLastSocket(mSocket);
@@ -77,9 +79,7 @@ public class SocketService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        messageReceiver = new MessageReceiver();
         IntentFilter filter = new IntentFilter(ConstantFinal.BROADCAST_ACTION);
-        registerReceiver(messageReceiver, filter);
         new InitSocketThread().start();
     }
 
@@ -87,26 +87,31 @@ public class SocketService extends Service {
      * @param msg 发送消息到服务器
      * @return
      */
-    public boolean sendMsg(String msg) {
-        if (null == mSocket || null == mSocket.get()) {
-            return false;
-        }
-        Socket soc = mSocket.get();
-        try {
-            if (!soc.isClosed() && !soc.isOutputShutdown()) {
-                OutputStream os = soc.getOutputStream();
-                String message = msg;
-                os.write(message.getBytes());
-                os.flush();
-                sendTime = System.currentTimeMillis();//每次发送成数据，就改一下最后成功发送的时间，节省心跳间隔时间
-            } else {
-                return false;
+    public void sendMsg(final String msg) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (null == mSocket || null == mSocket.get()) {
+                    isSend = false;
+                }
+                Socket soc = mSocket.get();
+                try {
+                    if (!soc.isClosed() && !soc.isOutputShutdown()) {
+                        OutputStream os = soc.getOutputStream();
+                        String message = msg;
+                        os.write(message.getBytes());
+                        os.flush();
+                        sendTime = System.currentTimeMillis();//每次发送成数据，就改一下最后成功发送的时间，节省心跳间隔时间
+                        isSend = true;
+                    } else {
+                        isSend = false;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    isSend = false;
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+        }).start();
     }
 
     private void initSocket() {//初始化Socket
@@ -115,8 +120,6 @@ public class SocketService extends Service {
             mSocket = new WeakReference<Socket>(so);
             mReadThread = new ReadThread(so);
             mReadThread.start();
-            //发送设备编号到服务器
-            sendMsg("AA " + DeviceUtil.getDeviceID());
             mHandler.postDelayed(heartBeatRunnable, HEART_BEAT_RATE);//初始化成功后，就准备发送心跳包
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -189,22 +192,11 @@ public class SocketService extends Service {
         }
     }
 
-    public class MessageReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String message = intent.getStringExtra(ConstantFinal.BROADCAST_ACTION);
-            ToastUtils.showShort(message);
-            sendMsg(message);
-        }
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mSocket != null) {
             releaseLastSocket(mSocket);
         }
-        unregisterReceiver(messageReceiver);
     }
 }

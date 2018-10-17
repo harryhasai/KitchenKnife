@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.harry.kitchenknife.R;
+import com.harry.kitchenknife.app_final.ConstantFinal;
 import com.harry.kitchenknife.app_final.URLFinal;
 import com.harry.kitchenknife.base.BaseActivity;
 import com.harry.kitchenknife.base.presenter.BasePresenter;
@@ -19,6 +20,7 @@ import com.harry.kitchenknife.network.entity.PayEntity;
 import com.harry.kitchenknife.utils.DeviceUtil;
 import com.harry.kitchenknife.utils.OkHttpHelper;
 import com.harry.kitchenknife.utils.QRCodeUtil;
+import com.harry.kitchenknife.utils.SPUtils;
 import com.harry.kitchenknife.utils.SerialPortUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -104,7 +106,7 @@ public class BuyPayActivity extends BaseActivity {
      */
     private void getAliPay() {
         Map<String, String> params = new HashMap<>();
-        params.put("phone", "15236144097");
+        params.put("phone", SPUtils.getString(ConstantFinal.USER_PHONE, ""));
         params.put("type", "0");
         params.put("number", number);
         params.put("equipmentNumber", DeviceUtil.getDeviceID());
@@ -135,7 +137,11 @@ public class BuyPayActivity extends BaseActivity {
                             }
                         });
                     } else {
-                        ToastUtils.showShort("请求码200");
+                        if (TextUtils.isEmpty(payEntity.extend.msg)) {
+                            ToastUtils.showShort(payEntity.msg);
+                        } else {
+                            ToastUtils.showShort(payEntity.extend.msg);
+                        }
                     }
                 }
             }

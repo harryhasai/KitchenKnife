@@ -3,6 +3,7 @@ package com.harry.kitchenknife.function.main;
 import android.content.Intent;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -16,7 +17,9 @@ import com.harry.kitchenknife.app_final.URLFinal;
 import com.harry.kitchenknife.base.BaseActivity;
 import com.harry.kitchenknife.base.presenter.BasePresenter;
 import com.harry.kitchenknife.event_bus.ReceiveMessageEvent;
+import com.harry.kitchenknife.event_bus.SendMessageEvent;
 import com.harry.kitchenknife.function.buy.BuyActivity;
+import com.harry.kitchenknife.function.login.LoginActivity;
 import com.harry.kitchenknife.function.recycle.RecycleActivity;
 import com.harry.kitchenknife.function.renting.RentingActivity;
 import com.harry.kitchenknife.function.service.SocketService;
@@ -56,6 +59,8 @@ public class MainActivity extends BaseActivity {
     LinearLayout flRecycle;
     private Intent serviceIntent;
 
+    private String receiveMessage = null;
+
     @Override
     protected int setupView() {
         return R.layout.activity_main;
@@ -64,6 +69,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
 
         serviceIntent = new Intent(this, SocketService.class);
         startService(serviceIntent);
@@ -72,12 +78,10 @@ public class MainActivity extends BaseActivity {
         intent.putExtra(ConstantFinal.BROADCAST_ACTION, getDeviceID());
         sendBroadcast(intent);
 
-        //初始化先GONE掉, 然后请求网络获取是否显示的状态
-        flBuy.setVisibility(View.GONE);
-        flRecycle.setVisibility(View.GONE);
-        flRenting.setVisibility(View.GONE);
+        flRecycle.setEnabled(false);
+        flRenting.setEnabled(false);
+        flBuy.setEnabled(false);
 
-        mainPageDisplay();
     }
 
     /**
@@ -102,39 +106,35 @@ public class MainActivity extends BaseActivity {
                     Gson gson = new Gson();
                     MainEntity mainEntity = gson.fromJson(s, MainEntity.class);
                     if (mainEntity.code == 100) {
-                        List<MainEntity.ExtendBean.HomesBean.EquipmentRolesBean> mList = mainEntity.extend.homes.equipmentRoles;
-                        for (int i = 0; i < mList.size(); i++) {
-                            MainEntity.ExtendBean.HomesBean.EquipmentRolesBean bean = mList.get(i);
-                            switch (bean.equipmentRoleId) {
-                                case 1:
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            flRenting.setVisibility(View.VISIBLE);
-                                        }
-                                    });
-                                    break;
-                                case 2:
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            flBuy.setVisibility(View.VISIBLE);
-                                        }
-                                    });
-                                    break;
-                                case 3:
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            flRecycle.setVisibility(View.VISIBLE);
-                                        }
-                                    });
-                                    break;
+                        final List<MainEntity.ExtendBean.HomesBean.EquipmentRolesBean> mList = mainEntity.extend.homes.equipmentRoles;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (mList.size() == 1) {
+                                    if (mList.get(0).equipmentRoleId == 1) {
+                                        flBuy.setVisibility(View.GONE);
+                                        flRecycle.setVisibility(View.GONE);
+                                    } else if (mList.get(0).equipmentRoleId == 2) {
+                                        flRenting.setVisibility(View.GONE);
+                                        flRecycle.setVisibility(View.GONE);
+                                    } else {
+                                        flBuy.setVisibility(View.GONE);
+                                        flRenting.setVisibility(View.GONE);
+                                    }
+                                } else if (mList.size() == 2) {
+                                    if (mList.get(0).equipmentRoleId == 1 && mList.get(1).equipmentRoleId == 2) {
+                                        flRecycle.setVisibility(View.GONE);
+                                    } else if (mList.get(0).equipmentRoleId == 1 && mList.get(1).equipmentRoleId == 3) {
+                                        flBuy.setVisibility(View.GONE);
+                                    } else if (mList.get(0).equipmentRoleId == 2 && mList.get(1).equipmentRoleId == 3) {
+                                        flRenting.setVisibility(View.GONE);
+                                    }
+                                }
                             }
-                        }
+                        });
                     } else {
                         //code == 200
-                        ToastUtils.showShort("请求码200");
+                        ToastUtils.showShort(mainEntity.msg);
                     }
 
                 }
@@ -169,13 +169,19 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(this, ShareActivity.class));
                 break;
             case R.id.fl_renting://出租
-                startActivity(new Intent(this, RentingActivity.class));
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.putExtra("name", "renting");
+                startActivity(intent);
                 break;
             case R.id.fl_buy://购买
-                startActivity(new Intent(this, BuyActivity.class));
+                Intent intent1 = new Intent(this, LoginActivity.class);
+                intent1.putExtra("name", "buy");
+                startActivity(intent1);
                 break;
             case R.id.fl_recycle://回收
-                startActivity(new Intent(this, RecycleActivity.class));
+                Intent intent2 = new Intent(this, LoginActivity.class);
+                intent2.putExtra("name", "recycle");
+                startActivity(intent2);
                 break;
         }
     }
@@ -184,6 +190,25 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         stopService(serviceIntent);
+        EventBus.getDefault().unregister(this);
+    }
+
+    private boolean isFirst = true;
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void receiveMessage(SendMessageEvent sendMessageEvent) {
+        //EventBus接收长连接反馈数据的方法, 用于获取ID
+        receiveMessage = sendMessageEvent.getMessage();
+        Log.i("MainActivity", "receiveMessage: " + sendMessageEvent.getMessage());
+        if (!TextUtils.isEmpty(receiveMessage)) {
+            flRecycle.setEnabled(true);
+            flRenting.setEnabled(true);
+            flBuy.setEnabled(true);
+            if (isFirst) {
+                mainPageDisplay();
+                isFirst = false;
+            }
+        }
+
     }
 
 }

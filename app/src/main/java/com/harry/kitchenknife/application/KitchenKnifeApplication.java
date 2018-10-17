@@ -18,6 +18,7 @@ public class KitchenKnifeApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        appContext = this;
         //初始化AndroidUtils
         Utils.init(this);
 
