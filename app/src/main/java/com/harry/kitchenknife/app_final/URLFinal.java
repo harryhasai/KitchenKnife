@@ -26,5 +26,9 @@ public class URLFinal {
      * 登录
      */
     public static final String LOGIN = "vmLogin";
+    /**
+     * 贩卖机出刀之后上传菜刀编号
+     */
+    public static final String UPLOAD_KNIFE_NUM = "uploadCommodityId";
 
 }
