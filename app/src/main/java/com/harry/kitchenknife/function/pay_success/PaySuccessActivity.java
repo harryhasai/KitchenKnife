@@ -86,6 +86,8 @@ public class PaySuccessActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(s)) {
                     //获取菜刀编号
                     knifeNumber = s;
+
+
                 }
                 if (s.equals(ConstantFinal.SHIPMENT_SUCCESS)) {
                     //出货成功
