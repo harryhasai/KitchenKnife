@@ -124,12 +124,13 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <ImageView
+                android:id="@+id/iv_ali_pay"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
-                android:gravity="center"
-                android:text="这里放二维码" />
+                android:contentDescription="这里放二维码"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="match_parent"

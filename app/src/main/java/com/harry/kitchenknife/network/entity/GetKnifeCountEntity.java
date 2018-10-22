@@ -38,8 +38,8 @@ public class GetKnifeCountEntity {
             public String commodityTypeNumber;
             public String commodityTypeTitle;
             public double commodityTypeSellingPrice;
-            public int commodityTypeRent;
-            public int commodityTypeRentalPrice;
+            public double commodityTypeRent;
+            public double commodityTypeRentalPrice;
             public int count;
             public List<ImageUrlBean> imageUrl;
 

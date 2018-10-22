@@ -73,8 +73,8 @@
 
         <ImageView
             android:id="@+id/iv_header"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:contentDescription="header"
@@ -82,15 +82,16 @@
             android:src="@drawable/ic_knife" />
 
         <LinearLayout
-            android:layout_width="70dp"
-            android:layout_height="22dp"
+            android:layout_width="90dp"
+            android:layout_height="28dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="3dp"
+            android:layout_marginStart="5dp"
             android:background="@drawable/shape_renting_edit_text_bg">
 
             <TextView
                 android:id="@+id/tv_reduce"
-                android:layout_width="20dp"
+                android:layout_width="0dp"
+                android:layout_weight="2"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="－"
@@ -98,7 +99,8 @@
 
             <TextView
                 android:id="@+id/tv_number"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
+                android:layout_weight="3"
                 android:layout_height="match_parent"
                 android:background="@drawable/layer_list_number"
                 android:gravity="center"
@@ -108,7 +110,8 @@
 
             <TextView
                 android:id="@+id/tv_plus"
-                android:layout_width="20dp"
+                android:layout_width="0dp"
+                android:layout_weight="2"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="＋"
@@ -135,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="¥60"
+                android:text="¥"
                 android:textColor="@color/text_red"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -143,8 +146,8 @@
 
         <Button
             android:id="@+id/btn_commit"
-            android:layout_width="75dp"
-            android:layout_height="30dp"
+            android:layout_width="85dp"
+            android:layout_height="35dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="15dp"

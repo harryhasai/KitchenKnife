@@ -60,7 +60,7 @@ public class BuyActivity extends BaseActivity {
     /**
      * 记录加减的数量
      */
-    private int number;
+    private int number = 1;
 
     /**
      * 菜刀个数
@@ -75,7 +75,7 @@ public class BuyActivity extends BaseActivity {
      */
     private String commodityTypeTitle;
     /**
-     * 菜刀金额
+     * 菜刀购买金额
      */
     private double commodityTypeSellingPrice;
 
@@ -118,6 +118,12 @@ public class BuyActivity extends BaseActivity {
                         commodityTypeNumber = bean.commodityTypeNumber;
                         commodityTypeTitle = bean.commodityTypeTitle;
                         commodityTypeSellingPrice = bean.commodityTypeSellingPrice;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvTotal.setText("¥" + number * commodityTypeSellingPrice);
+                            }
+                        });
                     } else {
                         ToastUtils.showShort(getKnifeCountEntity.msg);
                     }
@@ -141,14 +147,18 @@ public class BuyActivity extends BaseActivity {
                 if (number != 0) {
                     number--;
                     tvNumber.setText(String.valueOf(number));
+                    tvTotal.setText("¥" + number * commodityTypeSellingPrice);
                 }
                 break;
             case R.id.tv_plus:
-                if (number <= knifeCount) {
+                if (number < knifeCount) {
                     number++;
                     tvNumber.setText(String.valueOf(number));
+                    tvTotal.setText("¥" + number * commodityTypeSellingPrice);
                 } else {
+                    number = knifeCount;
                     tvNumber.setText(String.valueOf(number));
+                    tvTotal.setText("¥" + number * commodityTypeSellingPrice);
                 }
 
                 break;
@@ -161,6 +171,7 @@ public class BuyActivity extends BaseActivity {
                     intent.putExtra("commodityTypeTitle", commodityTypeTitle);
                     intent.putExtra("commodityTypeSellingPrice", commodityTypeSellingPrice);
                     startActivity(intent);
+                    finish();
                 }
                 break;
         }
