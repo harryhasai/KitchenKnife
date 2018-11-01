@@ -113,8 +113,8 @@ public class BuyPayActivity extends BaseActivity {
         params.put("commodityTypeNumber", commodityTypeNumber);
         params.put("payType", "1");
 
-//        String url = URLFinal.BASE_URL + URLFinal.ALI_PAY;
-        String url = "http://47.92.226.61/chopperAPP/alipay/createOrder";
+        String url = URLFinal.BASE_URL + URLFinal.ALI_PAY;
+//        String url = "http://47.92.226.61/chopperAPP/alipay/createOrder";
         OkHttpHelper.post(url, params, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

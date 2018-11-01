@@ -80,7 +80,6 @@ public class BuyActivity extends BaseActivity {
     private double commodityTypeSellingPrice;
 
 
-
     @Override
     protected int setupView() {
         return R.layout.activity_buy;
@@ -113,17 +112,24 @@ public class BuyActivity extends BaseActivity {
                     Gson gson = new Gson();
                     GetKnifeCountEntity getKnifeCountEntity = gson.fromJson(s, GetKnifeCountEntity.class);
                     if (getKnifeCountEntity.code == 100) {
-                        GetKnifeCountEntity.ExtendBean.CommodityTypesBean bean = getKnifeCountEntity.extend.commodityTypes.get(0);
-                        knifeCount = bean.count;
-                        commodityTypeNumber = bean.commodityTypeNumber;
-                        commodityTypeTitle = bean.commodityTypeTitle;
-                        commodityTypeSellingPrice = bean.commodityTypeSellingPrice;
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                tvTotal.setText("¥" + number * commodityTypeSellingPrice);
-                            }
-                        });
+                        if (getKnifeCountEntity.extend.commodityTypes.size() != 0) {
+                            GetKnifeCountEntity.ExtendBean.CommodityTypesBean bean = getKnifeCountEntity.extend.commodityTypes.get(0);
+                            knifeCount = bean.count;
+                            commodityTypeNumber = bean.commodityTypeNumber;
+                            commodityTypeTitle = bean.commodityTypeTitle;
+                            commodityTypeSellingPrice = bean.commodityTypeSellingPrice;
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    tvTotal.setText("¥" + number * commodityTypeSellingPrice);
+                                }
+                            });
+                        } else {
+                            number = 0;
+                            tvReduce.setEnabled(false);
+                            tvPlus.setEnabled(false);
+                            ToastUtils.showShort("暂无菜刀库存");
+                        }
                     } else {
                         ToastUtils.showShort(getKnifeCountEntity.msg);
                     }

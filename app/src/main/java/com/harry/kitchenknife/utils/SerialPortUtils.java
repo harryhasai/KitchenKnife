@@ -32,7 +32,7 @@ public class SerialPortUtils {
      *
      * @return serialPort串口对象
      */
-    public SerialPort openSerialPort(String path, int baudrate) throws IOException {
+    public SerialPort openSerialPort(String path, int baudrate) throws IOException, SecurityException {
         serialPort = new SerialPort(new File(path), baudrate, 0);
         this.serialPortStatus = true;
         threadStatus = false; //线程状态

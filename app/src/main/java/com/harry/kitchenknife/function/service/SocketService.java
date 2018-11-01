@@ -37,7 +37,7 @@ public class SocketService extends Service {
     //心跳包频率
     private static final long HEART_BEAT_RATE = 15 * 1000;
 
-    //    public static final String HOST = "192.168.1.10";
+//    public static final String HOST = "192.168.1.28";
     public static final String HOST = "47.92.226.61";
     public static final int PORT = 9502;
     public static final String HEART_BEAT_STRING = "00";//心跳包内容

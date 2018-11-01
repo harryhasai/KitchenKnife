@@ -45,8 +45,6 @@ public class PaySuccessActivity extends BaseActivity {
     @BindView(R.id.tv_result)
     TextView tvResult;
 
-    private String path = "/dev/ttyMT0";
-    int baudrate = 57600;
     private SerialPortUtils serialPortUtils;
     private String payID;
 
@@ -70,11 +68,14 @@ public class PaySuccessActivity extends BaseActivity {
     private void openSerialPort() {
         serialPortUtils = new SerialPortUtils();
         try {
-            serialPortUtils.openSerialPort(path, baudrate);
+            serialPortUtils.openSerialPort(ConstantFinal.PATH1, ConstantFinal.BAUD_RATE1);
 
             serialPortUtils.sendSerialPort(ConstantFinal.SHIPMENT);//贩卖机出货
         } catch (IOException e) {
             ToastUtils.showShort("打开串口异常");
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            ToastUtils.showShort("未打开正确的端口");
             e.printStackTrace();
         }
 

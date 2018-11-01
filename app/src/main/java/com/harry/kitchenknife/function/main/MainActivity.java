@@ -200,6 +200,7 @@ public class MainActivity extends BaseActivity {
         receiveMessage = sendMessageEvent.getMessage();
         Log.i("MainActivity", "receiveMessage: " + sendMessageEvent.getMessage());
         if (!TextUtils.isEmpty(receiveMessage)) {
+            ToastUtils.showShort(receiveMessage);
             flRecycle.setEnabled(true);
             flRenting.setEnabled(true);
             flBuy.setEnabled(true);

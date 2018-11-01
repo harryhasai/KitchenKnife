@@ -7,7 +7,7 @@ public class URLFinal {
     /**
      * BaseUrl
      */
-//    public static final String BASE_URL = "http://192.168.1.10:8080/chopperAPP/";
+//    public static final String BASE_URL = "http://192.168.1.28:8080/chopperAPP/";
     public static final String BASE_URL = "http://47.92.226.61/chopperAPP/";
 
     /**

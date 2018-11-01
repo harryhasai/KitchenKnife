@@ -30,4 +30,15 @@ public class ConstantFinal {
      * 用户电话号码
      */
     public static final String USER_PHONE = "USER_PHONE";
+    /**
+     * 出刀端口号
+     */
+    public static final String PATH1 = "/dev/ttyS1";
+    public static int BAUD_RATE1 = 115200;
+    /**
+     * 读取菜刀编号设备的端口号
+     */
+    public static final String PATH2 = "/dev/ttyS4";
+    public static int BAUD_RATE2 = 57600;
+
 }
