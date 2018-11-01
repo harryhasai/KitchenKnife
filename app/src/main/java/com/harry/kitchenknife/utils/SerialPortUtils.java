@@ -15,6 +15,9 @@ import android_serialport_api.SerialPort;
 public class SerialPortUtils {
 
     private final String TAG = "SerialPortUtils";
+
+
+
     //private String path = "/dev/ttyMT0";//平板电脑的路径
     //private int baudrate = 57600;
     public boolean serialPortStatus = false; //是否打开串口标志
